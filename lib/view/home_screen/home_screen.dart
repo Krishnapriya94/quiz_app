@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:quiz_app/utils/color_constants.dart';
 import 'package:quiz_app/view/home_screen/widgets/options_card.dart';
 import 'package:quiz_app/view/result_screen/result_screen.dart';
@@ -27,6 +28,11 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: ColorConstants.mainBlack,
       appBar: AppBar(
         backgroundColor: Colors.black,
+        title: LinearPercentIndicator(
+          progressColor: ColorConstants.mainRed,
+          percent: (currentindex + 1) / widget.questionList.length,
+          backgroundColor: ColorConstants.mainWhite,
+        ),
         actions: [
           Row(
             children: [
@@ -232,16 +238,18 @@ class _HomeScreenState extends State<HomeScreen> {
       if (widget.questionList[currentindex]["answerIndex"] == selectedIndex &&
           index == selectedIndex) {
         return Icon(
-          Icons.check_circle_outline_outlined,
+          Icons.check_circle,
           color: ColorConstants.mainGreen,
         );
       } else if (widget.questionList[currentindex]["answerIndex"] !=
               selectedIndex &&
           index == selectedIndex) {
-        return Icon(Icons.cancel_outlined, color: ColorConstants.mainRed);
+        return Icon(Icons.cancel, color: ColorConstants.mainRed);
       } else if (widget.questionList[currentindex]["answerIndex"] == index) {
-        return Icon(Icons.check_circle_outline_outlined,
-            color: ColorConstants.mainGreen);
+        return Icon(
+          Icons.check_circle,
+          color: ColorConstants.mainGreen,
+        );
       }
     }
     return Icon(Icons.circle_outlined);
